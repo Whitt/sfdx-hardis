@@ -1040,6 +1040,10 @@ export function uxLog(commandThis: any, text: string) {
   }
 }
 
+export function bool2emoji(bool: boolean): string {
+  return bool ? "✅" : "⬜"
+}
+
 // Caching methods
 const SFDX_LOCAL_FOLDER = '/root/.sfdx';
 const TMP_COPY_FOLDER = '.cache/sfdx-hardis/.sfdx';
@@ -1211,6 +1215,12 @@ export async function generateSSLCertificate(
         c.cyan(
           `Deploying Connected App ${c.bold(promptResponses.appName)} into target org ${options.targetUsername || ''
           } ...`
+        )
+      );
+      uxLog(
+        commandThis,
+        c.yellow(
+          `If you have an upload error, PLEASE READ THE MESSAGE AFTER, that will explain how to manually create the connected app, and don't forget the CERTIFICATE file :)`
         )
       );
       const isProduction = await isProductionOrg(options.targetUsername || null, { conn: conn });

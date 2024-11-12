@@ -63,8 +63,10 @@ nav:
         doc:
           extract:
             permsetgroups: hardis/doc/extract/permsetgroups.md
+          packagexml2markdown: hardis/doc/packagexml2markdown.md
           plugin:
             generate: hardis/doc/plugin/generate.md
+          project2markdown: hardis/doc/project2markdown.md
         lint:
           access: hardis/lint/access.md
           metadatastatus: hardis/lint/metadatastatus.md
@@ -76,6 +78,8 @@ nav:
           purge-references: hardis/misc/purge-references.md
           toml2csv: hardis/misc/toml2csv.md
         org:
+          community:
+            update: hardis/org/community/update.md
           configure:
             data: hardis/org/configure/data.md
             files: hardis/org/configure/files.md
@@ -92,6 +96,7 @@ nav:
             legacyapi: hardis/org/diagnose/legacyapi.md
             licenses: hardis/org/diagnose/licenses.md
             releaseupdates: hardis/org/diagnose/releaseupdates.md
+            unused-apex-classes: hardis/org/diagnose/unused-apex-classes.md
             unusedlicenses: hardis/org/diagnose/unusedlicenses.md
             unusedusers: hardis/org/diagnose/unusedusers.md
           files:
@@ -105,6 +110,7 @@ nav:
             all: hardis/org/monitor/all.md
             backup: hardis/org/monitor/backup.md
             limits: hardis/org/monitor/limits.md
+          multi-org-query: hardis/org/multi-org-query.md
           purge:
             apexlog: hardis/org/purge/apexlog.md
             flow: hardis/org/purge/flow.md

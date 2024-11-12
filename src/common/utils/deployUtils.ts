@@ -237,7 +237,7 @@ export async function smartDeploy(
             `sf project deploy quick` +
             ` --job-id ${deploymentCheckId} ` +
             (options.targetUsername ? ` -o ${options.targetUsername}` : '') +
-            ` --wait ${process.env.SFDX_DEPLOY_WAIT_MINUTES || '60'}` +
+            ` --wait ${process.env.SFDX_DEPLOY_WAIT_MINUTES || '120'}` +
             ` --verbose` +
             (process.env.SFDX_DEPLOY_DEV_DEBUG ? ' --dev-debug' : '');
           const quickDeployRes = await execSfdxJson(quickDeployCommand, commandThis, {
@@ -294,7 +294,7 @@ export async function smartDeploy(
         (options.targetUsername ? ` -o ${options.targetUsername}` : '') +
         (testlevel === 'NoTestRun' || branchConfig?.skipCodeCoverage === true ? '' : ' --coverage-formatters json-summary') +
         ' --verbose' +
-        ` --wait ${process.env.SFDX_DEPLOY_WAIT_MINUTES || '60'}` +
+        ` --wait ${process.env.SFDX_DEPLOY_WAIT_MINUTES || '120'}` +
         (process.env.SFDX_DEPLOY_DEV_DEBUG ? ' --dev-debug' : '');
       let deployRes;
       try {
@@ -405,9 +405,9 @@ async function handleDeployError(
   if (
     check === true &&
     branchConfig?.testCoverageNotBlocking === true &&
-    output.includes('=== Test Success') &&
+    (output.includes('=== Test Success') || output.includes('Test Success [')) &&
     !output.includes('Test Failures') &&
-    output.includes('=== Apex Code Coverage')
+    (output.includes('=== Apex Code Coverage') || output.includes("Failing: 0"))
   ) {
     uxLog(commandThis, c.yellow(c.bold('Deployment status: Deploy check success & Ignored test coverage error')));
     return { status: 0, stdout: (e as any).stdout, stderr: (e as any).stderr, testCoverageNotBlockingActivated: true };
@@ -773,7 +773,7 @@ export async function deployDestructiveChanges(
   await fs.copy(packageDeletedXmlFile, path.join(tmpDir, 'destructiveChanges.xml'));
   const deployDelete =
     `sf project deploy ${options.check ? 'validate' : 'start'} --metadata-dir ${tmpDir}` +
-    ` --wait ${process.env.SFDX_DEPLOY_WAIT_MINUTES || '60'}` +
+    ` --wait ${process.env.SFDX_DEPLOY_WAIT_MINUTES || '120'}` +
     ` --test-level ${options.testLevel || 'NoTestRun'}` +
     ' --ignore-warnings' + // So it does not fail in case metadata is already deleted
     (options.targetUsername ? ` --target-org ${options.targetUsername}` : '') +
@@ -826,7 +826,7 @@ export async function deployMetadatas(
   const deployCommand =
     `sf project deploy ${options.check ? 'validate' : 'start'}` +
     ` --metadata-dir ${options.deployDir || '.'}` +
-    ` --wait ${process.env.SFDX_DEPLOY_WAIT_MINUTES || '60'}` +
+    ` --wait ${process.env.SFDX_DEPLOY_WAIT_MINUTES || '120'}` +
     ` --test-level ${options.testlevel || 'RunLocalTests'}` +
     ` --api-version ${options.apiVersion || CONSTANTS.API_VERSION}` +
     (options.targetUsername ? ` --target-org ${options.targetUsername}` : '') +
@@ -1049,6 +1049,8 @@ export async function buildOrgManifest(
     await writeXmlFile(packageXmlFull, parsedPackageXml);
   }
 
+  const nbRetrievedItems = await countPackageXmlItems(packageXmlFull);
+  uxLog(this, c.cyan(`Full org package.xml contains ${c.bold(nbRetrievedItems)} items`))
   return packageXmlFull;
 }
 

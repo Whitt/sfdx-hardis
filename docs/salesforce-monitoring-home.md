@@ -41,7 +41,9 @@ Installation and usage are **admin-friendly**, and **notifications** can be sent
 
 _Example of visualization in Grafana_
 
-![](assets/images/grafana-screenshot.png)
+![](assets/images/grafana-screenshot.jpg)
+
+![](assets/images/grafana-screenshot-1.jpg)
 
 ![](assets/images/grafana-screenshot-2.png)
 
@@ -93,6 +95,7 @@ You can force the daily run of all commands by defining env var `MONITORING_IGNO
 | [Detect calls to deprecated API versions](salesforce-monitoring-deprecated-api-calls.md)                           | Daily     |
 | [Check Release Updates](salesforce-monitoring-release-updates.md)                                                  | Weekly    |
 | [Detect inactive users](salesforce-monitoring-inactive-users.md)                                                   | Weekly    |
+| [Detect not used Apex Classes (Batch,Schedulable,Queueable)](salesforce-monitoring-unused-apex-classes.md)         | Weekly    |
 | [Detect unused licenses](salesforce-monitoring-unused-licenses.md)                                                 | Weekly    |
 | [Detect custom elements with no access rights defined in permission sets](salesforce-monitoring-missing-access.md) | Weekly    |
 | [Detect custom labels and custom permissions that are not in use](salesforce-monitoring-unused-metadata.md)        | Weekly    |

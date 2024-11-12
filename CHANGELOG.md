@@ -4,6 +4,89 @@
 
 Note: Can be used with `sfdx plugins:install sfdx-hardis@beta` and docker image `hardisgroupcom/sfdx-hardis@beta`
 
+## [5.6.1] 2024-11-11
+
+- Fix hardis:org:user:activateinvalid interactive mode
+- Update Dockerfile email address
+- Upgrade default Grafana Dashboards to add Unused Apex Classes indicator
+- Update hardis:org:diagnose:unused-apex-classes and hardis:doc:packagexml2markdown documentation
+
+## [5.6.0] 2024-11-09
+
+- New command hardis:org:diagnose:unused-apex-classes, to detect Apex classes (Batch,Queueable,Schedulable) that has not been called for more than 365 days, that might be deleted to improve apex tests performances
+- hardis:doc:project2markdown: Update documentation
+- Polish CI/CD home doc
+- Refactor the build of [hardis:org:monitor:all](https://sfdx-hardis.cloudity.com/hardis/org/monitor/all/) documentation
+- Fix issue with ToolingApi calls: handle paginated results instead of only the first 200 records.
+
+## [5.5.0] 2024-11-03
+
+- hardis:doc:packagexml2markdown: Generate markdown documentation from a package.xml file
+- hardis:doc:project2markdown: Generate markdown documentation from any SFDX project (CI/CD, monitoring, projects not using sfdx-hardis...) in `docs` folder and add a link in README.md if existing.
+- hardis:org:monitor:backup: Call hardis:doc:project2markdown after backup
+- hardis:org:retrieve:packageconfig: Ignore standard Salesforce packages
+- Update CI/CD home documentation
+
+## [5.4.1] 2024-11-02
+
+- hardis:org:multi-org-query enhancements
+  - Improve documentation
+  - Allow to use --query-template as option to use one of the predefined templates via command line
+  - Handle errors if issues when the command is called via a CI/CD job
+- Upgrade dependencies
+
+## [5.4.0] 2024-11-02
+
+- New command hardis:org:multi-org-query allowing to execute a SOQL Bulk Query in multiple orgs and aggregate the results in a single CSV / XLS report
+- New command hardis:org:community:update to Activate / Deactivate communities from command line
+
+## [5.3.0] 2024-10-24
+
+- Update default Monitoring workflow for GitHub
+- Refactor file download code
+  - Display progress
+  - Better error handling
+- hardis:org:diagnose:legacyapi: Fix issue with big log files: Use stream to parse CSV and perform checks
+- Update default API version toto 62.0 (Winter 25 release)
+
+## [5.2.4] 2024-10-21
+
+- Fix hardis:org:fix:listviewmine: Use chrome-launcher to find chrome executable to use with puppeteer-core
+- Remove keyv dependency
+
+## [5.2.3] 2024-10-19
+
+- Change default `.mega-linter.yml` config
+- Display number of package.xml items before or after retrieving them
+- Doc: Update youtube preview images
+
+## [5.2.2] 2024-10-14
+
+- Fix doubling -d option in hardis:scratch:create
+
+## [5.2.1] 2024-10-14
+
+- 2 hardis commands: rename `-d` into something else when the short option was available twice on the same command
+
+## [5.2.0] 2024-10-14
+
+- Improve [BUILD & RUN documentation](https://sfdx-hardis.cloudity.com/salesforce-ci-cd-hotfixes/)
+- 21 hardis commands: rename `-o` short into `-f` when possible, or other short letter, to avoid collision with `-o` (`--target-org`) option
+- Fix GitHub Org Monitoring workflow (remove push event + fix command typo)
+
+## [5.1.0] 2024-10-11
+
+- hardis:project:deploy:smart: Fix to adapt stdout checks to output of `sf project deploy start` in case code coverage is ignored
+- hardis:org:monitor:backup: Allow spaces in folders
+- Remove pubsub from default .forceignore
+- Change default deployment waiting time from 60mn to 120mn
+- Display explicit warning message before ConnectedApp deployment so users don't forget to manually create the connected app with the certificate
+
+## [5.0.10] 2024-10-03
+
+- hardis:project:deploy:smart : Fix parsing of error strings
+- hardis:project:deploy:smart : Fix markdown display on PR summary
+
 ## [5.0.9] 2024-10-03
 
 - Fix link to tip doc from Pull Request / Merge Request comments
